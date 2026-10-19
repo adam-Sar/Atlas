@@ -203,9 +203,13 @@ export function TimeSeriesChart({
               yAxisId="right"
               orientation="right"
               stroke="#64748B"
+              width={65}
               tick={{ fill: '#F97316', fontSize: 11, fontFamily: 'JetBrains Mono' }}
               tickLine={{ stroke: '#222630' }}
-              tickFormatter={(v) => `${v > 0 ? '+' : ''}${v}${anomalyUnit}`}
+              tickFormatter={(v) => {
+                const num = Number(v)
+                return `${num > 0 ? '+' : ''}${num.toFixed(1)}${anomalyUnit}`
+              }}
               label={{
                 value: `Anomaly (${anomalyUnit})`,
                 angle: 90,

@@ -399,16 +399,21 @@ export function WorkspacePage() {
                       yAxisId="left"
                       stroke="#64748B"
                       domain={['auto', 'auto']}
+                      width={70}
                       tick={{ fill: '#00D2B4', fontSize: 10, fontFamily: 'JetBrains Mono' }}
-                      tickFormatter={(v) => `${v} ppm`}
+                      tickFormatter={(v) => `${Number(v).toFixed(0)} ppm`}
                     />
                     <YAxis
                       yAxisId="right"
                       orientation="right"
                       stroke="#64748B"
                       domain={['auto', 'auto']}
+                      width={65}
                       tick={{ fill: '#F97316', fontSize: 10, fontFamily: 'JetBrains Mono' }}
-                      tickFormatter={(v) => `+${v}°C`}
+                      tickFormatter={(v) => {
+                        const num = Number(v)
+                        return `${num > 0 ? '+' : ''}${num.toFixed(1)}°C`
+                      }}
                     />
                     <Tooltip
                       content={({ active, payload }) => {
@@ -467,7 +472,7 @@ export function WorkspacePage() {
 
               <div className="w-full h-80">
                 <ResponsiveContainer width="100%" height="100%">
-                  <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 10 }}>
+                  <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#1E222A" />
                     <XAxis
                       type="number"
@@ -476,7 +481,7 @@ export function WorkspacePage() {
                       domain={['dataMin - 2', 'dataMax + 2']}
                       stroke="#64748B"
                       tick={{ fill: '#94A3B8', fontSize: 10, fontFamily: 'JetBrains Mono' }}
-                      tickFormatter={(v) => `${v} ppm`}
+                      tickFormatter={(v) => `${Number(v).toFixed(0)} ppm`}
                     />
                     <YAxis
                       type="number"
@@ -484,8 +489,12 @@ export function WorkspacePage() {
                       name="Temp Anomaly"
                       domain={['dataMin - 0.2', 'dataMax + 0.2']}
                       stroke="#64748B"
+                      width={65}
                       tick={{ fill: '#F97316', fontSize: 10, fontFamily: 'JetBrains Mono' }}
-                      tickFormatter={(v) => `+${v}°C`}
+                      tickFormatter={(v) => {
+                        const num = Number(v)
+                        return `${num > 0 ? '+' : ''}${num.toFixed(1)}°C`
+                      }}
                     />
                     <Tooltip
                       cursor={{ strokeDasharray: '3 3' }}
